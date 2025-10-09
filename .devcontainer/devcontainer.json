@@ -8,8 +8,8 @@
             "USERNAME": "YOUR_USERNAME"
         }
     },
-    "workspaceFolder": "/home/ws/terrence_2.0",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/home/ws,type=bind",
+    "workspaceFolder": "/home/ws/",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/ws/,type=bind",
     "customizations": {
         "vscode": {
             "extensions":[
