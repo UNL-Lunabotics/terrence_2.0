@@ -8,7 +8,7 @@
             "USERNAME": "YOUR_USERNAME"
         }
     },
-    "workspaceFolder": "/home/ws",
+    "workspaceFolder": "/home/ws/terrence_2.0",
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/ws,type=bind",
     "customizations": {
         "vscode": {

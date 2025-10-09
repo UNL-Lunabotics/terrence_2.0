@@ -1,0 +1,10 @@
+# ROS 2 colcon generated directories
+/build/
+/install/
+/log/
+
+# ignore vscode settings
+.vscode/
+
+# ignore local environments
+.env
