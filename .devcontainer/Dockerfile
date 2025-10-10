@@ -18,6 +18,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
 RUN apt-get install -y ros-humble-xacro ros-humble-joint-state-publisher-gui
+RUN echo "source /opt/ros/humble/setup.bash" >> /home/$USERNAME/.bashrc
 ENV SHELL /bin/bash
 
 # ********************************************************
