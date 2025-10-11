@@ -18,7 +18,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
 RUN apt-get install -y ros-humble-desktop ros-dev-tools ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-gazebo-ros-pkgs
-RUN echo "source /opt/ros/humble/setup.bash" >> /home/$USERNAME/.bashrc
+RUN echo "source /home/ws/install/setup.bash" >> /home/$USERNAME/.bashrc
 ENV SHELL /bin/bash
 
 # ********************************************************
