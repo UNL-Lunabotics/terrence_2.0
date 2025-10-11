@@ -4,6 +4,11 @@
   gz_type_name: "gz.msgs.Clock"
   direction: GZ_TO_ROS
 
+- topic_name: "/cmd_vel"
+  ros_type_name: "geometry_msgs/msg/Twist"
+  gz_type_name: "gz.msgs.Twist"
+  direction: ROS_TO_GZ
+
 # gz topic published by Sensors plugin
 - ros_topic_name: "scan"
   gz_topic_name: "scan"

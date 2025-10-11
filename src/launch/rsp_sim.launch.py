@@ -2,7 +2,6 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 
-
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
@@ -61,10 +60,20 @@ def generate_launch_description():
             f'config_file:={bridge_params}'
         ]
     )
+    
+    teleop = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        name='teleop_twist_keyboard',
+        output='screen',
+        remappings=[('/cmd_vel', '/cmd_vel')]
+    )
+
 
     # Launch them all!
     return LaunchDescription([
         rsp,
+        teleop,
         world_arg,
         gazebo,
         spawn_entity,
