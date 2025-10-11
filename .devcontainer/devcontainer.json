@@ -29,14 +29,11 @@
         "ROS_DOMAIN_ID": "42"
     },
     "features": {
-        "ghcr.io/devcontainers/features/desktop-lite:1": {
-            "webPort": "6080"
-        }
+        "ghcr.io/devcontainers/features/desktop-lite:1": {}
     },
-    "forwardPorts": [6080],
     "portsAttributes": {
-    "6080": {
-        "label": "desktop"
+        "6080": {
+            "label": "desktop"
         }
     },
     "runArgs": [

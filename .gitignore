@@ -8,3 +8,5 @@
 
 # ignore local environments
 .env
+
+.DS_STORE
