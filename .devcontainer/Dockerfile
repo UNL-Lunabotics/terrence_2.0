@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ros:humble
+FROM ros:humble
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -17,7 +17,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
-RUN apt-get install -y ros-humble-desktop ros-dev-tools ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-gazebo-ros-pkgs
+RUN apt-get install -y ros-humble-desktop ros-dev-tools ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-twist-mux ros-humble-twist-stamper ros-humble-ros2-control ros-humble-ros2-controllers
+RUN apt-get install -y ros-humble-ros-gz ros-humble-gz-ros2-control
 RUN echo "source /home/ws/install/setup.bash" >> /home/$USERNAME/.bashrc
 ENV SHELL /bin/bash
 
