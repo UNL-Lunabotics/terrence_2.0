@@ -1,7 +1,11 @@
-FROM ros:humble
+ARG ROS_DISTRO=ROS_DISTRO
+
+FROM ros:${ROS_DISTRO}
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+
+ARG ROS_DISTRO
 
 # Delete user if it exists in container (e.g Ubuntu Noble: ubuntu)
 RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
@@ -17,8 +21,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
-RUN apt-get install -y ros-humble-desktop ros-dev-tools ros-humble-xacro ros-humble-joint-state-publisher-gui ros-humble-twist-mux ros-humble-twist-stamper ros-humble-ros2-control ros-humble-ros2-controllers
-RUN apt-get install -y ros-humble-ros-gz ros-humble-gz-ros2-control
+RUN apt-get install -y ros-${ROS_DISTRO}-desktop ros-dev-tools ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-joint-state-publisher-gui ros-${ROS_DISTRO}-twist-mux ros-${ROS_DISTRO}-twist-stamper ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
+RUN apt-get install -y ros-${ROS_DISTRO}-ros-gz ros-${ROS_DISTRO}-gz-ros2-control
 RUN echo "source /home/ws/install/setup.bash" >> /home/$USERNAME/.bashrc
 ENV SHELL /bin/bash
 

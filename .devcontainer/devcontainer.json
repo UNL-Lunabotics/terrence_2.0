@@ -5,7 +5,8 @@
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "USERNAME": "aiden"
+            "USERNAME": "aiden",
+            "ROS_DISTRO": "humble"
         }
     },
     "workspaceFolder": "/home/ws/",
