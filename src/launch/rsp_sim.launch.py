@@ -28,7 +28,7 @@ def generate_launch_description():
     
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value=default_world,
+        default_value='src/worlds/empty.sdf',
         description='World to load'
     )
 
@@ -68,7 +68,6 @@ def generate_launch_description():
         output='screen',
         remappings=[('/cmd_vel', '/cmd_vel')]
     )
-
 
     # Launch them all!
     return LaunchDescription([
