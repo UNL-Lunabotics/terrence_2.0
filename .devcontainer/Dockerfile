@@ -1,4 +1,4 @@
-FROM ros:humble
+FROM --platform=linux/amd64 ros:humble
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
