@@ -7,7 +7,7 @@ Launch **ros2** package:<br>
     `ros2 launch terrence_2 rsp.launch.py`
 
 Launch **ros2** package with *simulation* (Note: `world:=` is optional):<br>
-    `ros2 launch terrence_2 rsp_sim.launch.py world:=src/worlds/[world_name].world`
+    `ros2 launch terrence_2 rsp_sim.launch.py world:=src/worlds/[world_name].sdf`
 
 Run **rviz2** with a config file:<br>
     `rviz2 -d src/config/[config_name].rviz`
@@ -15,8 +15,11 @@ Run **rviz2** with a config file:<br>
 Run the **Joint State Publisher GUI**:<br>
     `ros2 run joint_state_publisher_gui joint_state_publisher_gui`
 
+Run the **Teleop Twist Keyboard**:<br>
+    `ros2 run teleop_twist_keyboard teleop_twist_keyboard`
+
 Run **Gazebo**:<br>
-    `ros2 launch gazebo_ros gazebo.launch.py`
+    `ros2 launch ros_gz_sim gz_sim.launch.py`
 
 Spawn a `.urdf` into **Gazebo**:<br>
-    `ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity terrence_2`
+    `ros2 run ros_gz_sim create -topic robot_description -name terrence_2 -z 0.1`
