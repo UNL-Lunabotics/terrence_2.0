@@ -24,14 +24,24 @@
         }
     },
     "containerEnv": {
-        "DISPLAY": "unix:0",
         "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
         "ROS_DOMAIN_ID": "42"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/desktop-lite:1": {
+            "webPort": "6080"
+        }
+    },
+    "forwardPorts": [6080],
+    "portsAttributes": {
+    "6080": {
+        "label": "desktop"
+        }
     },
     "runArgs": [
         "--net=host",
         "--pid=host",
         "--ipc=host",
-        "-e", "DISPLAY=${env:DISPLAY}"
+        "-e", "DISPLAY=:0"
     ]
 }
