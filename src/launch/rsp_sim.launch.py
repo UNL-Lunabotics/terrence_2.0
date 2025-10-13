@@ -68,6 +68,15 @@ def generate_launch_description():
         output='screen',
         remappings=[('/cmd_vel', '/cmd_vel')]
     )
+    
+    image_compressor = Node(
+        package='image_transport',
+        executable='republish',
+        arguments=[
+            'raw', 'compressed',
+            '--ros-args', '-r', 'in:=/camera/image_raw', '-r', 'out:=/camera/camera/image_raw'
+        ]
+    )
 
     # Launch them all!
     return LaunchDescription([
@@ -76,5 +85,6 @@ def generate_launch_description():
         world_arg,
         gazebo,
         spawn_entity,
-        ros_gz_bridge
+        ros_gz_bridge,
+        image_compressor
     ])

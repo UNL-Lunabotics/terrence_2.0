@@ -34,7 +34,7 @@
         <material>Gazebo/Red</material>
         <sensor name="laser" type="gpu_lidar">
             <pose> 0 0 0 0 0 0 </pose>
-            <visualize>false</visualize>
+            <visualize>true</visualize>
             <update_rate>10</update_rate>
             <lidar>
                 <scan>
