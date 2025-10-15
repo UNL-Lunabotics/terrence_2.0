@@ -1,30 +1,39 @@
-# FROM ros:jazzy        # TODO: Uncomment this if you've successfully figured out how to install ROS2 by yourself
-FROM ubuntu:jammy
+ARG ROS_DISTRO=humble
+FROM ros:${ROS_DISTRO}
+
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 # Delete user if it exists in container (e.g Ubuntu Noble: ubuntu)
-RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
+RUN if id -u $USER_UID >/dev/null 2>&1; then userdel "$(id -un $USER_UID)"; fi
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    #
-    # [Optional] Add sudo support. Omit if you don't need to install software after connecting.
     && apt-get update \
-    && apt-get install -y sudo \
-    && apt-get install -y git \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && apt-get install -y sudo git python3-pip \
+    && echo "$USERNAME ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
+
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y python3-pip
-ENV SHELL /bin/bash
 
-# ********************************************************
-# * Anything else you want to do like clean up goes here *
-# ********************************************************
+# Install ROS packages
+RUN apt-get install -y ros-${ROS_DISTRO}-desktop ros-dev-tools \
+    ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-joint-state-publisher-gui \
+    ros-${ROS_DISTRO}-twist-mux ros-${ROS_DISTRO}-twist-stamper \
+    ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers \
+    ros-${ROS_DISTRO}-ros-gz ros-${ROS_DISTRO}-gz-ros2-control
 
-# [Optional] Set the default user. Omit if you want to keep the default as root.
+# Source ROS automatically for the user
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/$USERNAME/.bashrc
+
+ENV SHELL=/bin/bash
+ENV ROS_DISTRO=${ROS_DISTRO}
+ENV ROS_ROOT=/opt/ros/${ROS_DISTRO}
+ENV PATH="${ROS_ROOT}/bin:${PATH}"
+ENV LD_LIBRARY_PATH="${ROS_ROOT}/lib:${LD_LIBRARY_PATH}"
+ENV PYTHONPATH="${ROS_ROOT}/lib/python3.10/site-packages:${PYTHONPATH}"
+
 USER $USERNAME
-CMD ["/bin/bash"]
+CMD ["bash", "-i"]
