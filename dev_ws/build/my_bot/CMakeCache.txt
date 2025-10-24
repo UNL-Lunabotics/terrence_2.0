@@ -25,7 +25,7 @@ AMENT_CMAKE_ENVIRONMENT_PARENT_PREFIX_PATH_GENERATION:BOOL=ON
 
 //Replace the CMake install command with a custom implementation
 // using symlinks instead of copying resources
-AMENT_CMAKE_SYMLINK_INSTALL:BOOL=OFF
+AMENT_CMAKE_SYMLINK_INSTALL:BOOL=1
 
 //Generate an uninstall target to revert the effects of the install
 // step
@@ -338,7 +338,7 @@ my_bot_BINARY_DIR:STATIC=/home/ws/dev_ws/build/my_bot
 my_bot_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-my_bot_SOURCE_DIR:STATIC=/home/ws/dev_ws/src/my_bot-main
+my_bot_SOURCE_DIR:STATIC=/home/ws/dev_ws/src/my_bot
 
 //Path to a program.
 xmllint_BIN:FILEPATH=/usr/bin/xmllint
@@ -428,7 +428,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/ws/dev_ws/src/my_bot-main
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/ws/dev_ws/src/my_bot
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -497,4 +497,6 @@ _Python3_EXECUTABLE:INTERNAL=/usr/bin/python3
 //Python3 Properties
 _Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;10;12;64;;cpython-310-aarch64-linux-gnu;/usr/lib/python3.10;/usr/lib/python3.10;/usr/lib/python3/dist-packages;/usr/lib/python3/dist-packages
 _Python3_INTERPRETER_SIGNATURE:INTERNAL=0f3e53742e142b1d9e50e4ca5b901dd8
+//Index for unique symlink install targets
+__AMENT_CMAKE_SYMLINK_INSTALL_TARGETS_INDEX:INTERNAL=0
 

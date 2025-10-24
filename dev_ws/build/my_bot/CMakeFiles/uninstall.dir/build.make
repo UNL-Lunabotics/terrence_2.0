@@ -53,7 +53,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ws/dev_ws/src/my_bot-main
+CMAKE_SOURCE_DIR = /home/ws/dev_ws/src/my_bot
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/ws/dev_ws/build/my_bot
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/ws/dev_ws/build/my_bot && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ws/dev_ws/src/my_bot-main /home/ws/dev_ws/src/my_bot-main /home/ws/dev_ws/build/my_bot /home/ws/dev_ws/build/my_bot /home/ws/dev_ws/build/my_bot/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ws/dev_ws/build/my_bot && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ws/dev_ws/src/my_bot /home/ws/dev_ws/src/my_bot /home/ws/dev_ws/build/my_bot /home/ws/dev_ws/build/my_bot /home/ws/dev_ws/build/my_bot/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

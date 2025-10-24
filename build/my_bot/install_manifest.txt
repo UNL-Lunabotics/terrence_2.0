@@ -1,4 +1,5 @@
 /home/ws/install/my_bot/share/my_bot/config/empty.yaml
+/home/ws/install/my_bot/share/my_bot/description/robot_cor.xacro
 /home/ws/install/my_bot/share/my_bot/description/robot.urdf.xacro
 /home/ws/install/my_bot/share/my_bot/launch/rsp.launch.py
 /home/ws/install/my_bot/share/my_bot/worlds/empty.world
