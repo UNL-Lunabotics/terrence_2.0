@@ -1,3 +1,0 @@
-this is only here so the folder commits to git correctly :)
-testing new personal fork auto commit 
-double checking new personal fork after adjustment

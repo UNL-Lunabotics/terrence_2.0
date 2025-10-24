@@ -39,11 +39,10 @@
     ],
     "postCreateCommand": [
     "git config --global user.name 'HolmbergLandon'",
-    "git config --global user.email 'ljholmberg2006@gmail.com'", 
+    "git config --global user.email 'ljholmberg2006@gmail.com'",
     "sudo rosdep update",
     "sudo rosdep install --from-paths src --ignore-src -y",
     "sudo chown -R $(whoami) /home/ws/"
 ]
-
 
 }

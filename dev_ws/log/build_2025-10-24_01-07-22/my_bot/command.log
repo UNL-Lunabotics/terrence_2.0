@@ -1,0 +1,6 @@
+Invoking command in '/home/ws/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ws/dev_ws/src/my_bot-main -DCMAKE_INSTALL_PREFIX=/home/ws/dev_ws/install/my_bot
+Invoked command in '/home/ws/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ws/dev_ws/src/my_bot-main -DCMAKE_INSTALL_PREFIX=/home/ws/dev_ws/install/my_bot
+Invoking command in '/home/ws/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ws/dev_ws/build/my_bot -- -j8 -l8
+Invoked command in '/home/ws/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ws/dev_ws/build/my_bot -- -j8 -l8
+Invoking command in '/home/ws/dev_ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ws/dev_ws/build/my_bot
+Invoked command in '/home/ws/dev_ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ws/dev_ws/build/my_bot
