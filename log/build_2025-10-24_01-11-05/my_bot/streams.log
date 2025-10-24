@@ -1,0 +1,53 @@
+[0.008s] Invoking command in '/home/ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ws/dev_ws/src/my_bot-main -DCMAKE_INSTALL_PREFIX=/home/ws/install/my_bot
+[0.064s] -- The C compiler identification is GNU 11.4.0
+[0.107s] -- The CXX compiler identification is GNU 11.4.0
+[0.112s] -- Detecting C compiler ABI info
+[0.202s] -- Detecting C compiler ABI info - done
+[0.207s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.207s] -- Detecting C compile features
+[0.208s] -- Detecting C compile features - done
+[0.210s] -- Detecting CXX compiler ABI info
+[0.311s] -- Detecting CXX compiler ABI info - done
+[0.317s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.317s] -- Detecting CXX compile features
+[0.318s] -- Detecting CXX compile features - done
+[0.324s] -- Found ament_cmake: 1.3.12 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.398s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.445s] -- Found ament_lint_auto: 0.12.14 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[0.494s] -- Added test 'copyright' to check source files copyright and LICENSE
+[0.502s] -- Added test 'flake8' to check Python code syntax and style conventions
+[0.504s] -- Added test 'lint_cmake' to check CMake code style
+[0.505s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[0.513s] -- Added test 'xmllint' to check XML markup files
+[0.520s] -- Configuring done
+[0.532s] -- Generating done
+[0.540s] -- Build files have been written to: /home/ws/build/my_bot
+[0.541s] Invoked command in '/home/ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ws/dev_ws/src/my_bot-main -DCMAKE_INSTALL_PREFIX=/home/ws/install/my_bot
+[0.542s] Invoking command in '/home/ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ws/build/my_bot -- -j8 -l8
+[0.606s] Invoked command in '/home/ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ws/build/my_bot -- -j8 -l8
+[0.624s] Invoking command in '/home/ws/build/my_bot': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ws/build/my_bot
+[0.639s] -- Install configuration: ""
+[0.640s] -- Installing: /home/ws/install/my_bot/share/my_bot/config
+[0.641s] -- Installing: /home/ws/install/my_bot/share/my_bot/config/empty.yaml
+[0.642s] -- Installing: /home/ws/install/my_bot/share/my_bot/description
+[0.643s] -- Installing: /home/ws/install/my_bot/share/my_bot/description/robot.urdf.xacro
+[0.644s] -- Installing: /home/ws/install/my_bot/share/my_bot/launch
+[0.645s] -- Installing: /home/ws/install/my_bot/share/my_bot/launch/rsp.launch.py
+[0.647s] -- Installing: /home/ws/install/my_bot/share/my_bot/worlds
+[0.648s] -- Installing: /home/ws/install/my_bot/share/my_bot/worlds/empty.world
+[0.650s] -- Installing: /home/ws/install/my_bot/share/ament_index/resource_index/package_run_dependencies/my_bot
+[0.652s] -- Installing: /home/ws/install/my_bot/share/ament_index/resource_index/parent_prefix_path/my_bot
+[0.654s] -- Installing: /home/ws/install/my_bot/share/my_bot/environment/ament_prefix_path.sh
+[0.655s] -- Installing: /home/ws/install/my_bot/share/my_bot/environment/ament_prefix_path.dsv
+[0.656s] -- Installing: /home/ws/install/my_bot/share/my_bot/environment/path.sh
+[0.657s] -- Installing: /home/ws/install/my_bot/share/my_bot/environment/path.dsv
+[0.659s] -- Installing: /home/ws/install/my_bot/share/my_bot/local_setup.bash
+[0.660s] -- Installing: /home/ws/install/my_bot/share/my_bot/local_setup.sh
+[0.662s] -- Installing: /home/ws/install/my_bot/share/my_bot/local_setup.zsh
+[0.663s] -- Installing: /home/ws/install/my_bot/share/my_bot/local_setup.dsv
+[0.664s] -- Installing: /home/ws/install/my_bot/share/my_bot/package.dsv
+[0.666s] -- Installing: /home/ws/install/my_bot/share/ament_index/resource_index/packages/my_bot
+[0.667s] -- Installing: /home/ws/install/my_bot/share/my_bot/cmake/my_botConfig.cmake
+[0.668s] -- Installing: /home/ws/install/my_bot/share/my_bot/cmake/my_botConfig-version.cmake
+[0.670s] -- Installing: /home/ws/install/my_bot/share/my_bot/package.xml
+[0.673s] Invoked command in '/home/ws/build/my_bot' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ws/build/my_bot
