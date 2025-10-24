@@ -44,14 +44,6 @@ def generate_launch_description():
         output='screen'
     )
     
-    # ros2_params = os.path.join(get_package_share_directory(package_name), 'config', 'my_controllers.yaml')
-    # ros2_control = Node(
-    #     package='controller_manager',
-    #     executable='ros2_control_node',
-    #     parameters=[ros2_params],
-    #     output='screen',
-    # )
-    
     diff_drive_spawner = Node(
         package="controller_manager",
         executable="spawner",
