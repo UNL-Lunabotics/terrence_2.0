@@ -10,18 +10,12 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    package_name='terrence_2'
+    package_name = 'terrence_2'
 
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory(package_name),'launch','rsp.launch.py'
         )]), launch_arguments={'use_sim_time': 'true'}.items()
-    )
-    
-    default_world = os.path.join( 
-        get_package_share_directory(package_name),
-        'worlds',
-        'empty.world'                         
     )
     
     world = LaunchConfiguration('world')
@@ -44,10 +38,30 @@ def generate_launch_description():
     spawn_entity = Node(package='ros_gz_sim', executable='create',
         arguments=[
             '-topic', 'robot_description',
-            '-name', 'terrence_2'
+            '-name', 'terrence_2',
             '-z', '0.1'
         ],
         output='screen'
+    )
+    
+    # ros2_params = os.path.join(get_package_share_directory(package_name), 'config', 'my_controllers.yaml')
+    # ros2_control = Node(
+    #     package='controller_manager',
+    #     executable='ros2_control_node',
+    #     parameters=[ros2_params],
+    #     output='screen',
+    # )
+    
+    diff_drive_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_cont"]
+    )
+
+    joint_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_broad"],
     )
 
     bridge_params = os.path.join(get_package_share_directory(package_name), 'config', 'gz_bridge.yaml')
@@ -85,6 +99,8 @@ def generate_launch_description():
         world_arg,
         gazebo,
         spawn_entity,
+        diff_drive_spawner,
+        joint_broad_spawner,
         ros_gz_bridge,
         image_compressor
     ])
