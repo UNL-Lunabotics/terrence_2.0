@@ -5,7 +5,8 @@
     <xacro:include filename="robot_core.xacro"/>
 
     <!-- How the robot is controlled (Teleop or Ros2 Control) -->
-    <xacro:include filename="gazebo_control.xacro"/>
+    <!-- <xacro:include filename="gazebo_control.xacro"/> -->
+    <xacro:include filename="ros2_control.xacro"/>
 
     <!-- LIDAR attachment and functionality -->
     <!-- <xacro:include filename="lidar.xacro"/> -->
