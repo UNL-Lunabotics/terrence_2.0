@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
 
+    <!-- The Core Skeleton of the Robot -->
     <xacro:include filename="robot_core.xacro"/>
+
+    <!-- How the robot is controlled (Teleop or Ros2 Control) -->
     <xacro:include filename="gazebo_control.xacro"/>
+
+    <!-- LIDAR attachment and functionality -->
     <!-- <xacro:include filename="lidar.xacro"/> -->
-     <xacro
+
 
 </robot>
