@@ -15,14 +15,14 @@ def generate_launch_description():
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
             get_package_share_directory(package_name),'launch','rsp.launch.py'
-        )]), launch_arguments={'use_sim_time': 'true'}.items()
+        )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': 'true'}.items()
     )
     
     world = LaunchConfiguration('world')
     
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value='src/worlds/empty.sdf',
+        default_value='src/worlds/obstacles.sdf',
         description='World to load'
     )
 
