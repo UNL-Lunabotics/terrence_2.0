@@ -18,6 +18,12 @@ def generate_launch_description():
         )]), launch_arguments={'use_sim_time': 'true', 'use_ros2_control': 'true'}.items()
     )
     
+    joystick = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([os.path.join(
+            get_package_share_directory(package_name),'launch','joystick.launch.py'
+        )]), launch_arguments={'use_sim_time': 'true'}.items()
+    )
+    
     world = LaunchConfiguration('world')
     
     world_arg = DeclareLaunchArgument(
@@ -87,6 +93,7 @@ def generate_launch_description():
     # Launch them all!
     return LaunchDescription([
         rsp,
+        joystick,
         teleop,
         world_arg,
         gazebo,
