@@ -1,4 +1,4 @@
-# FROM ros:humble       # TODO: Uncomment this if you've successfully figured out how to install ROS2 by yourself
+FROM ros:humble       # TODO: Uncomment this if you've successfully figured out how to install ROS2 by yourself
 FROM ubuntu:jammy
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
