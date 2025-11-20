@@ -41,6 +41,9 @@
         "--net=host",
         "--pid=host",
         "--ipc=host",
-        "-e", "DISPLAY=:0"
-    ]
+        "-e", "DISPLAY=:0",
+        "--device", "/dev/bus/usb:/dev/bus/usb",
+        "--cap-add=SYS_RAWIO"
+    ],
+    "postStartCommand": "sudo chmod -R 666 /dev/input && sudo chmod +x /dev/input"
 }
