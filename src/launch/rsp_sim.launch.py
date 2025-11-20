@@ -85,7 +85,7 @@ def generate_launch_description():
         executable='republish',
         arguments=[
             'raw', 'compressed',
-            '--ros-args', '-r', 'in:=/camera/image_raw', '-r', 'out:=/camera/camera/image_raw'
+            '--ros-args', '-r', 'in:=/camera/image_raw', '-r', 'out:=/camera/image_compressed'
         ]
     )
 
