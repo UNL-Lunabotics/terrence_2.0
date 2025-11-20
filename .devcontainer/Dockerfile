@@ -19,12 +19,14 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && apt-get install -y sudo \
     && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update
 RUN apt-get install -y python3-pip
 RUN apt-get install -y ros-${ROS_DISTRO}-desktop ros-dev-tools ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-joint-state-publisher-gui ros-${ROS_DISTRO}-twist-mux ros-${ROS_DISTRO}-twist-stamper ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers
 RUN apt-get install -y ros-${ROS_DISTRO}-ros-gz ros-${ROS_DISTRO}-gz-ros2-control
 RUN apt-get install -y ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-gz-ros2-control
 RUN apt-get install -y joystick jstest-gtk evtest
+RUN apt-get install -y ros-humble-slam-toolbox ros-humble-navigation2 ros-humble-nav2-bringup
+RUN apt-get upgrade -y
 RUN echo "source /home/ws/install/setup.bash" >> /home/$USERNAME/.bashrc
 ENV SHELL /bin/bash
 
