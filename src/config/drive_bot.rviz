@@ -1,4 +1,4 @@
-Panels:
+Panes:
   - Class: rviz_common/Displays
     Help Height: 0
     Name: Displays
