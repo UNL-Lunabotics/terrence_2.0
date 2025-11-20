@@ -77,8 +77,7 @@ def generate_launch_description():
         package='teleop_twist_keyboard',
         executable='teleop_twist_keyboard',
         name='teleop_twist_keyboard',
-        output='screen',
-        remappings=[('/cmd_vel', '/cmd_vel')]
+        output='screen'
     )
     
     image_compressor = Node(
