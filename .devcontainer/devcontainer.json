@@ -6,7 +6,7 @@
         "dockerfile": "Dockerfile",
         "args": {
             "USERNAME": "aiden",
-            "ROS_DISTRO": "jazzy"
+            "ROS_DISTRO": "humble"
         }
     },
     "workspaceFolder": "/home/ws/",
