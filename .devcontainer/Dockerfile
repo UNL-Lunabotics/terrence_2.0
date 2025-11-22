@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 ARG ROS_DISTRO=ROS_DISTRO
 
 FROM ros:${ROS_DISTRO}
+=======
+FROM ros:humble       # TODO: Uncomment this if you've successfully figured out how to install ROS2 by yourself
+FROM ubuntu:jammy
+>>>>>>> 03e2d59a97e02fbc07f9bb2a442dc81bf15b5f59
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
