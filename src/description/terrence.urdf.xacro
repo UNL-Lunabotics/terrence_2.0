@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="LilT_Combined_URDF">
 
-  <xacro:arg name="sim_mode" default="false" />
-  <xacro:include filename="ros2_control.xacro" />
+  <xacro:arg name="use_ros2_control" default="true"/>
+  <xacro:arg name="sim_mode" default="false"/>
+
+  <xacro:if value="$(arg use_ros2_control)">
+        <xacro:include filename="ros2_control.xacro"/>
+    </xacro:if>
+    <xacro:unless value="$(arg use_ros2_control)">
+        <xacro:include filename="gazebo_control.xacro"/>
+    </xacro:unless>
 
   <link name="base_link" />
   <link name="base_footprint" />
@@ -41,6 +48,9 @@
     <child link="Base" />
   </joint>
 
+  <gazebo reference="Base">
+    <material>Gazebo/White</material>
+  </gazebo>
 
   <link name="DriverWheel">
     <inertial>
@@ -72,6 +82,13 @@
     <axis xyz="1 0 0" />
     <limit effort="10" velocity="0" />
   </joint>
+
+  <gazebo reference="DriverWheel">
+    <material>Gazebo/Blue</material>
+      <mu1 value="0.001"/>
+      <mu2 value="0.001"/>
+  </gazebo>
+
   <link name="DriverSprocket">
     <inertial>
       <origin xyz="0.0097746 -3.5292E-09 -5.2457E-08" rpy="0 0 0" />
@@ -102,6 +119,11 @@
     <axis xyz="1 0 0" />
     <limit effort="10" velocity="0" />
   </joint>
+
+  <gazebo reference="DriverSprocket">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
   <link name="PassWheel">
     <inertial>
       <origin xyz="0.020612 8.4006E-05 -0.00023239" rpy="0 0 0" />
@@ -132,6 +154,13 @@
     <axis xyz="1 0 0" />
     <limit effort="10" velocity="0" />
   </joint>
+
+  <gazebo reference="PassWheel">
+    <material>Gazebo/Blue</material>
+      <mu1 value="0.001"/>
+      <mu2 value="0.001"/>
+  </gazebo>
+
   <link name="PassSprocket">
     <inertial>
       <origin xyz="-0.0056813 -3.6211E-09 -5.2434E-08" rpy="0 0 0" />
@@ -162,6 +191,11 @@
     <axis xyz="1 0 0" />
     <limit effort="10" velocity="0" />
   </joint>
+
+  <gazebo reference="PassSprocket">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
   <link name="Loader">
     <inertial>
       <origin xyz="-0.14124 -0.17161 0.14187" rpy="0 0 0" />
@@ -192,6 +226,11 @@
     <axis xyz="-1 0 0" />
     <limit lower="0" upper="1.571" effort="10" velocity="0.7854" />
   </joint>
+
+  <gazebo reference="Loader">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
   <link name="Hopper">
     <inertial>
       <origin xyz="-0.079042 0.080085 0.065194" rpy="0 0 0" />
@@ -222,6 +261,11 @@
     <axis xyz="-1 0 0" />
     <limit lower="0" upper="0.785" effort="10" velocity="0.3927" />
   </joint>
+
+  <gazebo reference="Hopper">
+    <material>Gazebo/White</material>
+  </gazebo>
+
   <link name="Door">
     <inertial>
       <origin xyz="-0.09525 -0.062153 -0.013449" rpy="0 0 0" />
@@ -252,4 +296,9 @@
     <axis xyz="1 0 0" />
     <limit lower="0" upper="0.3927" effort="0" velocity="0" />
   </joint>
+
+  <gazebo reference="Door">
+    <material>Gazebo/White</material>
+  </gazebo>
+
 </robot>
