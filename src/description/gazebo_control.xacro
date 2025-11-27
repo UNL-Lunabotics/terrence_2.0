@@ -28,6 +28,12 @@
             <topic>joint_states</topic>
             <joint_name>DS_Joint</joint_name>
             <joint_name>PS_Joint</joint_name>
+            
+            <joint_name>DW_Joint</joint_name>
+            <joint_name>PW_Joint</joint_name>
+            <joint_name>LoaderJoint</joint_name>
+            <joint_name>HopperJoint</joint_name>
+            <joint_name>DoorJoint</joint_name>
         </plugin>
     </gazebo>
 </robot>
