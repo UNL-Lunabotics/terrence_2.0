@@ -20,10 +20,9 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
-find_package(serial REQUIRED)
 
-add_library(diffdrive_arduino_with_scoop SHARED
-  hardware/diffdrive_arduino_with_scoop.cpp
+add_library(terrence_hw SHARED
+  hardware/terrence.cpp
 )
 
 target_include_directories(diffdrive_arduino_with_scoop PUBLIC
@@ -35,20 +34,26 @@ ament_target_dependencies(diffdrive_arduino_with_scoop
   rclcpp_lifecycle
   hardware_interface
   pluginlib
-  serial
+)
+
+pament_target_dependencies(terrence_hw
+  rclcpp
+  rclcpp_lifecycle
+  hardware_interface
+  pluginlib
 )
 
 pluginlib_export_plugin_description_file(
-  hardware_interface plugins/diffdrive_arduino_with_scoop.xml
+  hardware_interface plugins/terrence.xml
 )
 
 install(
-  TARGETS diffdrive_arduino_with_scoop
+  TARGETS terrence_hw
   DESTINATION lib
 )
 
 install(
-  FILES plugins/diffdrive_arduino_with_scoop.xml
+  FILES plugins/terrence.xml
   DESTINATION share/${PROJECT_NAME}
 )
 
