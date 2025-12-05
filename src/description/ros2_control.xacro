@@ -3,57 +3,28 @@
     <xacro:unless value="$(arg sim_mode)">
         <ros2_control name="RealRobot" type="system">
             <hardware>
-                <plugin>diffdrive_arduino/DiffDriveArduino</plugin>
-                <param name="DS_Joint">DS_Joint</param>
-                <param name="PS_Joint">PS_Joint</param>
+                <param name="left_wheel_name">DS_Joint</param>
+                <param name="right_wheel_name">PS_Joint</param>
                 <param name="loop_rate">30</param>
                 <param name="device">/dev/ttyUSB0</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout">1000</param>
             </hardware>
-            <joint name="DS_Joint">
+            <joint name="left_wheel_joint">
                 <command_interface name="velocity">
                     <param name="min">-10</param>
                     <param name="max">10</param>
                 </command_interface>
-                <state_interface name="velocity"/>
                 <state_interface name="position"/>
+                <state_interface name="velocity"/>
             </joint>
-
-            <joint name="PS_Joint">
+            <joint name="right_wheel_joint">
                 <command_interface name="velocity">
                     <param name="min">-10</param>
                     <param name="max">10</param>
                 </command_interface>
-                <state_interface name="velocity"/>
-                <state_interface name="position"/>
-            </joint>
-            
-            <joint name="DW_Joint">
                 <state_interface name="position"/>
                 <state_interface name="velocity"/>
-            </joint>
-
-            <joint name="PW_Joint">
-                <state_interface name="position"/>
-                <state_interface name="velocity"/>
-            </joint>
-
-            <joint name="LoaderJoint">
-                <command_interface name="position">
-                    <param name="min">-1.57</param>  <!-- ~ -90 deg -->
-                    <param name="max"> 1.57</param>  <!-- ~  90 deg -->
-                </command_interface>
-                <state_interface name="position"/>
-                <state_interface name="velocity"/>
-            </joint>
-
-            <joint name="HopperJoint">
-                <state_interface name="position"/>
-            </joint>
-
-            <joint name="DoorJoint">
-                <state_interface name="position"/>
             </joint>
         </ros2_control>
     </xacro:unless>

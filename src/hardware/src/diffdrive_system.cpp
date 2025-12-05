@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "diffdrive_arduino/diffbot_system.hpp"
+#include "diffdrive_arduino/diffbot_system.h"
 
 #include <chrono>
 #include <cmath>
@@ -237,4 +237,6 @@ hardware_interface::return_type diffdrive_arduino ::DiffDriveArduinoHardware::wr
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(
-  diffdrive_arduino::DiffDriveArduinoHardware, hardware_interface::SystemInterface)
+  diffdrive_arduino::DiffDriveArduino,
+  hardware_interface::SystemInterface
+)

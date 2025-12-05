@@ -1,4 +1,3 @@
-
 from launch import LaunchDescription
 from launch.actions import RegisterEventHandler
 from launch.event_handlers import OnProcessExit
@@ -9,6 +8,7 @@ from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
+    # Pass xacro arguments: sim_mode:=false, use_ros2_control:=true
     robot_description_content = Command(
         [
             PathJoinSubstitution([FindExecutable(name="xacro")]),
@@ -16,6 +16,10 @@ def generate_launch_description():
             PathJoinSubstitution(
                 [FindPackageShare("terrence_2"), "description", "terrence.urdf.xacro"]
             ),
+            " ",
+            "sim_mode:=false",
+            " ",
+            "use_ros2_control:=true",
         ]
     )
     robot_description = {"robot_description": robot_description_content}
@@ -27,25 +31,26 @@ def generate_launch_description():
             "my_controllers.yaml",
         ]
     )
-    # rviz_config_file = PathJoinSubstitution(
-    #     [FindPackageShare("terrence_2"), "rviz", "diffbot.rviz"]
-    # )
 
+    # Explicitly disable sim time on controller manager
     control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[robot_description, robot_controllers],
+        parameters=[robot_description, robot_controllers, {"use_sim_time": False}],
         output="both",
     )
+
+    # Explicitly disable sim time on robot_state_publisher too
     robot_state_pub_node = Node(
         package="robot_state_publisher",
         executable="robot_state_publisher",
         output="both",
-        parameters=[robot_description],
+        parameters=[robot_description, {"use_sim_time": False}],
         remappings=[
             ("/diff_drive_controller/cmd_vel_unstamped", "/cmd_vel"),
         ],
     )
+
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
