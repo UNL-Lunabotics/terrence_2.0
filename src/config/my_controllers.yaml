@@ -8,6 +8,9 @@ controller_manager:
 
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
+    
+    scoop_controller:
+      type: forward_command_controller/ForwardCommandController
 
 diff_cont:
   ros__parameters:
@@ -66,3 +69,9 @@ diff_cont:
 
 # joint_broad:
 #   ros__parameters:
+
+scoop_controller:
+  ros__parameters:
+    joints:
+      - LoaderJoint          # or HopperJoint if that's your scoop
+    interface_name: position

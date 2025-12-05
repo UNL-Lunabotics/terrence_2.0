@@ -78,6 +78,12 @@ def generate_launch_description():
             '--ros-args', '-r', 'in:=/camera/image_raw', '-r', 'out:=/camera/camera/image_raw'
         ]
     )
+    
+    scoop_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["scoop_controller"],
+    )
 
     # Launch them all!
     return LaunchDescription([
@@ -85,7 +91,8 @@ def generate_launch_description():
         delayed_controller_manager,
         diff_drive_spawner,
         joint_broad_spawner,
-        # teleop,
+        teleop,
+        scoop_spawner,
         # world_arg,
         # ros_gz_bridge,
         # image_compressor

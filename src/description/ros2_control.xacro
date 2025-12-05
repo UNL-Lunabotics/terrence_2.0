@@ -41,7 +41,12 @@
             </joint>
 
             <joint name="LoaderJoint">
+                <command_interface name="position">
+                    <param name="min">-1.57</param>  <!-- ~ -90 deg -->
+                    <param name="max"> 1.57</param>  <!-- ~  90 deg -->
+                </command_interface>
                 <state_interface name="position"/>
+                <state_interface name="velocity"/>
             </joint>
 
             <joint name="HopperJoint">
