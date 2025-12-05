@@ -22,7 +22,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Install ros2
 RUN apt-get update && apt-get upgrade -y \
-    && apt-get install -y python3-pip \
+    && apt-get install -y python3 python3-pip \
     && apt-get install -y ros-${ROS_DISTRO}-desktop \
     && apt-get install -y ros-dev-tools ros-${ROS_DISTRO}-xacro ros-${ROS_DISTRO}-joint-state-publisher-gui ros-${ROS_DISTRO}-twist-mux ros-${ROS_DISTRO}-twist-stamper \
     && apt-get install -y ros-${ROS_DISTRO}-ros2-control ros-${ROS_DISTRO}-ros2-controllers ros-${ROS_DISTRO}-ros-gz ros-${ROS_DISTRO}-gz-ros2-control \
