@@ -1,88 +1,39 @@
 // teensy_firmware/src/teensy.cpp
+// Minimal 3-pin version:
+//  - Pin 6: left motor PWM
+//  - Pin 7: right motor PWM
+//  - Pin 8: scoop motor PWM
+// No direction pins, no encoders.
 
 #include <Arduino.h>
 
-// ======= USER CONFIG: pins, encoder CPR, etc. ==================
+// =================== USER CONFIG ===================================
 
-// Motor driver pins: fill these in for your hardware
-// Left drive motor
-constexpr int LEFT_PWM_PIN   = 2;
-constexpr int LEFT_DIR_PIN   = 3;
-constexpr int LEFT_ENC_A_PIN = 4;
-constexpr int LEFT_ENC_B_PIN = 5;
+// Motor pins
+constexpr int LEFT_PWM_PIN   = 6;
+constexpr int RIGHT_PWM_PIN  = 7;
+constexpr int SCOOP_PWM_PIN  = 8;
 
-// Right drive motor
-constexpr int RIGHT_PWM_PIN   = 6;
-constexpr int RIGHT_DIR_PIN   = 7;
-constexpr int RIGHT_ENC_A_PIN = 8;
-constexpr int RIGHT_ENC_B_PIN = 9;
+// Max command magnitude expected from ROS (e.g. rad/s or arbitrary units)
+constexpr float MAX_WHEEL_CMD = 10.0f;
+constexpr float MAX_SCOOP_CMD = 10.0f;
 
-// Scoop motor
-constexpr int SCOOP_PWM_PIN   = 10;
-constexpr int SCOOP_DIR_PIN   = 11;
-constexpr int SCOOP_ENC_A_PIN = 12;
-constexpr int SCOOP_ENC_B_PIN = 13;
+// If you literally have no way to reverse (one PWM pin, driver only cares about duty),
+// set this true and we’ll clamp negative commands to 0.
+constexpr bool ONE_DIRECTION_ONLY = true;
 
-// Encoder counts per rev (must match enc_counts_per_rev in ros2_control.xacro)
-constexpr long ENCODER_CPR = 3450;
+// ===================================================================
 
-// Simple velocity-to-PWM scaling (tune this!)
-constexpr float MAX_WHEEL_RAD_PER_SEC = 10.0f;
-constexpr float MAX_SCOOP_CMD         = 10.0f;
-
-// ===============================================================
-
-volatile long enc_left_counts  = 0;
-volatile long enc_right_counts = 0;
-volatile long enc_scoop_counts = 0;
-
-// Last commanded velocities / commands (for debugging)
+// Last commanded values (just for debugging)
 float cmd_left  = 0.0f;
 float cmd_right = 0.0f;
 float cmd_scoop = 0.0f;
 
 // Forward declarations
 void handleSerialLine(const String & line);
-void setMotor(int pwm_pin, int dir_pin, float cmd, float max_cmd);
-void setupEncoders();
+void setMotorPwmOnly(int pwm_pin, float cmd, float max_cmd);
 
-// ===== Encoder ISRs (you must adapt to your wiring) ============
-
-// These are placeholders; you'll want proper quadrature decode.
-// For quick-and-dirty: count A rising edges as +1/-1 depending on B.
-void IRAM_ATTR leftEncAISR()
-{
-  int b = digitalRead(LEFT_ENC_B_PIN);
-  enc_left_counts += (b ? -1 : 1);
-}
-
-void IRAM_ATTR rightEncAISR()
-{
-  int b = digitalRead(RIGHT_ENC_B_PIN);
-  enc_right_counts += (b ? -1 : 1);
-}
-
-void IRAM_ATTR scoopEncAISR()
-{
-  int b = digitalRead(SCOOP_ENC_B_PIN);
-  enc_scoop_counts += (b ? -1 : 1);
-}
-
-void setupEncoders()
-{
-  pinMode(LEFT_ENC_A_PIN, INPUT_PULLUP);
-  pinMode(LEFT_ENC_B_PIN, INPUT_PULLUP);
-  pinMode(RIGHT_ENC_A_PIN, INPUT_PULLUP);
-  pinMode(RIGHT_ENC_B_PIN, INPUT_PULLUP);
-  pinMode(SCOOP_ENC_A_PIN, INPUT_PULLUP);
-  pinMode(SCOOP_ENC_B_PIN, INPUT_PULLUP);
-
-  attachInterrupt(digitalPinToInterrupt(LEFT_ENC_A_PIN), leftEncAISR, RISING);
-  attachInterrupt(digitalPinToInterrupt(RIGHT_ENC_A_PIN), rightEncAISR, RISING);
-  attachInterrupt(digitalPinToInterrupt(SCOOP_ENC_A_PIN), scoopEncAISR, RISING);
-}
-
-// ===============================================================
+String line_buffer;
 
 void setup()
 {
@@ -92,26 +43,18 @@ void setup()
   }
 
   pinMode(LEFT_PWM_PIN, OUTPUT);
-  pinMode(LEFT_DIR_PIN, OUTPUT);
   pinMode(RIGHT_PWM_PIN, OUTPUT);
-  pinMode(RIGHT_DIR_PIN, OUTPUT);
   pinMode(SCOOP_PWM_PIN, OUTPUT);
-  pinMode(SCOOP_DIR_PIN, OUTPUT);
 
-  setupEncoders();
-
-  // Coasts to a stop on boot
+  // Start with motors off
   analogWrite(LEFT_PWM_PIN, 0);
   analogWrite(RIGHT_PWM_PIN, 0);
   analogWrite(SCOOP_PWM_PIN, 0);
 }
 
-// Simple line buffer
-String line_buffer;
-
 void loop()
 {
-  // Read serial input line-by-line
+  // Read serial input line by line
   while (Serial.available() > 0) {
     char c = static_cast<char>(Serial.read());
     if (c == '\n' || c == '\r') {
@@ -124,24 +67,20 @@ void loop()
     }
   }
 
-  // (Optionally add a small delay to reduce CPU usage)
-  delay(1);
+  delay(1);  // tiny breather
 }
 
 void handleSerialLine(const String & line)
 {
   if (line.length() == 0) return;
 
-  // First character is command
   char cmd = line.charAt(0);
 
   if (cmd == 'm') {
     // "m <left> <right> <scoop>"
-    // parse floats from rest of line
     float left = 0.0f, right = 0.0f, scoop = 0.0f;
-
-    // crude parsing using sscanf-style function; String::c_str() is fine
     int parsed = sscanf(line.c_str(), "m %f %f %f", &left, &right, &scoop);
+
     if (parsed >= 2) {
       cmd_left  = left;
       cmd_right = right;
@@ -149,49 +88,45 @@ void handleSerialLine(const String & line)
         cmd_scoop = scoop;
       }
 
-      setMotor(LEFT_PWM_PIN,  LEFT_DIR_PIN,  cmd_left,  MAX_WHEEL_RAD_PER_SEC);
-      setMotor(RIGHT_PWM_PIN, RIGHT_DIR_PIN, cmd_right, MAX_WHEEL_RAD_PER_SEC);
-      setMotor(SCOOP_PWM_PIN, SCOOP_DIR_PIN, cmd_scoop, MAX_SCOOP_CMD);
+      setMotorPwmOnly(LEFT_PWM_PIN,  cmd_left,  MAX_WHEEL_CMD);
+      setMotorPwmOnly(RIGHT_PWM_PIN, cmd_right, MAX_WHEEL_CMD);
+      setMotorPwmOnly(SCOOP_PWM_PIN, cmd_scoop, MAX_SCOOP_CMD);
     }
   }
   else if (cmd == 'e') {
-    // Request encoder values
-    long l, r, s;
-    noInterrupts();
-    l = enc_left_counts;
-    r = enc_right_counts;
-    s = enc_scoop_counts;
-    interrupts();
+    // Encoder request: we have no encoders, so just return zeros.
+    // This keeps the ROS hardware plugin from choking on missing data,
+    // but gives you no real odometry.
+    long enc_left = 0;
+    long enc_right = 0;
+    long enc_scoop = 0;
 
     Serial.print("e ");
-    Serial.print(l);
+    Serial.print(enc_left);
     Serial.print(" ");
-    Serial.print(r);
+    Serial.print(enc_right);
     Serial.print(" ");
-    Serial.println(s);
+    Serial.println(enc_scoop);
   }
   else if (cmd == 'z') {
-    // Optional: zero encoders
-    noInterrupts();
-    enc_left_counts  = 0;
-    enc_right_counts = 0;
-    enc_scoop_counts = 0;
-    interrupts();
+    // Zero encoders – no-op here, but keep for protocol compatibility.
+    // (nothing to do)
   }
-  // You can add more commands here as needed.
+  // Add more commands if needed
 }
 
-void setMotor(int pwm_pin, int dir_pin, float cmd, float max_cmd)
+void setMotorPwmOnly(int pwm_pin, float cmd, float max_cmd)
 {
+  // If the hardware only supports one direction, clamp negatives to 0
+  if (ONE_DIRECTION_ONLY && cmd < 0.0f) {
+    cmd = 0.0f;
+  }
+
   // Saturate
   if (cmd > max_cmd) cmd = max_cmd;
   if (cmd < -max_cmd) cmd = -max_cmd;
 
-  // Direction
-  bool dir = (cmd >= 0.0f);
-  digitalWrite(dir_pin, dir ? HIGH : LOW);
-
-  // Scale |cmd| -> [0, 255]
+  // Convert |cmd| to 0–255 duty cycle
   float mag = fabsf(cmd) / max_cmd;
   if (mag > 1.0f) mag = 1.0f;
   int pwm = static_cast<int>(mag * 255.0f);

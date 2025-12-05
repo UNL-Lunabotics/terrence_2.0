@@ -3,14 +3,13 @@
     <xacro:unless value="$(arg sim_mode)">
         <ros2_control name="RealRobot" type="system">
             <hardware>
-                <plugin>diffdrive_arduino/DiffDriveArduino</plugin>
+                <plugin>terrence_2/Terrence</plugin>
                 <param name="DS_Joint">DS_Joint</param>
                 <param name="PS_Joint">PS_Joint</param>
                 <param name="loop_rate">30</param>
                 <param name="device">/dev/ttyUSB0</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout">1000</param>
-                <param name="enc_counts_per_rev">3450</param>
             </hardware>
             <joint name="DS_Joint">
                 <command_interface name="velocity">
