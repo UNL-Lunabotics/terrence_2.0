@@ -22,29 +22,29 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 
 add_library(terrence_hw SHARED
-  src/hardware/terrence.cpp
+  hardware/terrence.cpp
 )
 
-target_include_directories(diffdrive_arduino_with_scoop PUBLIC
+target_include_directories(terrence_hw PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-ament_target_dependencies(diffdrive_arduino_with_scoop
+ament_target_dependencies(terrence_hw
   rclcpp
   rclcpp_lifecycle
   hardware_interface
   pluginlib
 )
 
-pament_target_dependencies(terrence_hw
-  rclcpp
-  rclcpp_lifecycle
-  hardware_interface
-  pluginlib
-)
+# pament_target_dependencies(terrence_hw
+#   rclcpp
+#   rclcpp_lifecycle
+#   hardware_interface
+#   pluginlib
+# )
 
 pluginlib_export_plugin_description_file(
-  hardware_interface src/plugins/terrence.xml
+  hardware_interface plugins/terrence.xml
 )
 
 install(
@@ -53,7 +53,7 @@ install(
 )
 
 install(
-  FILES src/plugins/terrence.xml
+  FILES plugins/terrence.xml
   DESTINATION share/${PROJECT_NAME}
 )
 
