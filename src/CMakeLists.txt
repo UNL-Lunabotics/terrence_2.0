@@ -22,7 +22,7 @@ find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
 
 add_library(terrence_hw SHARED
-  hardware/terrence.cpp
+  src/hardware/terrence.cpp
 )
 
 target_include_directories(diffdrive_arduino_with_scoop PUBLIC
@@ -44,7 +44,7 @@ pament_target_dependencies(terrence_hw
 )
 
 pluginlib_export_plugin_description_file(
-  hardware_interface plugins/terrence.xml
+  hardware_interface src/plugins/terrence.xml
 )
 
 install(
@@ -53,12 +53,12 @@ install(
 )
 
 install(
-  FILES plugins/terrence.xml
+  FILES src/plugins/terrence.xml
   DESTINATION share/${PROJECT_NAME}
 )
 
 install(
-  DIRECTORY config description launch worlds
+  DIRECTORY config description launch worlds hardware
   DESTINATION share/${PROJECT_NAME}
 )
 
