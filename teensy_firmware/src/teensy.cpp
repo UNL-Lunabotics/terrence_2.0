@@ -20,7 +20,7 @@ constexpr float MAX_SCOOP_CMD = 10.0f;
 
 // If you literally have no way to reverse (one PWM pin, driver only cares about duty),
 // set this true and we’ll clamp negative commands to 0.
-constexpr bool ONE_DIRECTION_ONLY = true;
+constexpr bool ONE_DIRECTION_ONLY = false;
 
 // ===================================================================
 
