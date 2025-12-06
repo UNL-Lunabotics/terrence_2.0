@@ -56,7 +56,7 @@ struct Config
 
 
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(DiffDriveArduinoHardware);
+  RCLCPP_SHARED_PTR_DEFINITIONS(DiffDriveArduino);
 
   DIFFDRIVE_ARDUINO_PUBLIC
   hardware_interface::CallbackReturn on_init(
