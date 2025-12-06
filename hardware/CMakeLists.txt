@@ -5,7 +5,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
   add_compile_options(-Wall -Wextra)
 endif()
 
-# 1. Dependencies
+# Dependencies
 set(THIS_PACKAGE_INCLUDE_DEPENDS
   hardware_interface
   pluginlib
@@ -18,18 +18,19 @@ foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
 
-# 2. Compile the Library
+## COMPILE
 add_library(
   diffdrive_arduino
   SHARED
-  src/diffbot_system.cpp  
+  src/diffdrive_system.cpp
 )
 
 target_compile_features(diffdrive_arduino PUBLIC cxx_std_17)
 
+# IMPORTANT: include/ is now directly under this package root
 target_include_directories(diffdrive_arduino PUBLIC
-  $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
-  $<INSTALL_INTERFACE:include/diffdrive_arduino>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
 )
 
 ament_target_dependencies(
@@ -37,31 +38,25 @@ ament_target_dependencies(
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
-# Link serial library (assuming it's a system library or found package)
+# Only keep this if you *actually* have a library named "serial" to link against.
+# Otherwise comment it out or replace with whatever you really use.
 target_link_libraries(diffdrive_arduino PUBLIC serial)
 
-# Visibility definitions (Required for Windows/Cross-platform, good practice generally)
-target_compile_definitions(${PROJECT_NAME} PRIVATE "DIFFDRIVE_ARDUINO_BUILDING_DLL")
+# Export visibility macro
+target_compile_definitions(diffdrive_arduino PRIVATE "DIFFDRIVE_ARDUINO_BUILDING_DLL")
 
-# 3. Export the Plugin to Ament Index
+# Export hardware plugin description to pluginlib
 pluginlib_export_plugin_description_file(hardware_interface diffdrive_arduino.xml)
 
-# 4. INSTALL RULES
+## INSTALL
 
-# A. Install the XML file (THE FIX)
-# The error happens because this file is missing from share/diffdrive_arduino
+# Install headers
 install(
-  FILES diffdrive_arduino.xml
-  DESTINATION share/diffdrive_arduino
+  DIRECTORY include/
+  DESTINATION include
 )
 
-# B. Install Headers
-install(
-  DIRECTORY hardware/include/
-  DESTINATION include/diffdrive_arduino
-)
-
-# C. Install the Shared Library (.so)
+# Install the shared library
 install(TARGETS diffdrive_arduino
   EXPORT export_diffdrive_arduino
   ARCHIVE DESTINATION lib
@@ -69,7 +64,17 @@ install(TARGETS diffdrive_arduino
   RUNTIME DESTINATION bin
 )
 
-# 5. Export Targets
+# Install plugin XML so hardware_interface can find it
+install(
+  FILES diffdrive_arduino.xml
+  DESTINATION share/${PROJECT_NAME}
+)
+
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+endif()
+
+## EXPORTS
 ament_export_targets(export_diffdrive_arduino HAS_LIBRARY_TARGET)
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 ament_package()

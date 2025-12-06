@@ -3,6 +3,7 @@
     <xacro:unless value="$(arg sim_mode)">
         <ros2_control name="RealRobot" type="system">
             <hardware>
+                <plugin>diffdrive_arduino/DiffDriveArduino</plugin>
                 <param name="left_wheel_name">DS_Joint</param>
                 <param name="right_wheel_name">PS_Joint</param>
                 <param name="loop_rate">30</param>
