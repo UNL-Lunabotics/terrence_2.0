@@ -9,4 +9,6 @@
 # ignore local environments
 .env
 
+.pio/
+
 .DS_STORE
