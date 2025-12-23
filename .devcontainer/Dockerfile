@@ -1,5 +1,4 @@
-# FROM ros:humble       # TODO: Uncomment this if you've successfully figured out how to install ROS2 by yourself
-FROM ubuntu:jammy
+FROM ros:humble 
 ARG USERNAME=USERNAME
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -18,6 +17,8 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y python3-pip
+RUN apt-get install -y git
+RUN apt-get install -y ros-humble-xacro ros-humble-joint-state-publisher-gui
 ENV SHELL /bin/bash
 
 # ********************************************************
