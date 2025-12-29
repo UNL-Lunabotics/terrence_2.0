@@ -1,12 +1,11 @@
 Source Files:
-source /opt/ros/humble/setup.bash
 source install/setup.bash
 
 Run Launch File:
 ros2 launch luna_test rsp.launch.py use_sim_time:=true
 
 Run Gazebo Launch File:
-ros2 launch luna_test launch_sim.launch.py
+ros2 launch luna_test launch_sim.launch.py world:=./src/luna_test/worlds/test.world
 
 Run Rviz:
 rviz2
