@@ -3,30 +3,29 @@
 
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
-            <plugin>ros2_control_gazebo/GazeboSystem</plugin>
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
         </hardware>
         <joint name="left_wheel_joint">
-            <command_interface name="velocity"> 
-                <param name="min" value="-10.0"/>
-                <param name="max" value="10.0"/>    
+            <command_interface name="velocity">
+                <param name="min" value="-10.0" />
+                <param name="max" value="10.0" />
             </command_interface>
-            <state_interface name="velocity"/>
-            <state_interface name="position"/>
+            <state_interface name="velocity" />
+            <state_interface name="position" />
         </joint>
         <joint name="right_wheel_joint">
-            <command_interface name="velocity"> 
-                <param name="min" value="-10.0"/>
-                <param name="max" value="10.0"/>    
+            <command_interface name="velocity">
+                <param name="min" value="-10.0" />
+                <param name="max" value="10.0" />
             </command_interface>
-            <state_interface name="velocity"/>
-            <state_interface name="position"/>
+            <state_interface name="velocity" />
+            <state_interface name="position" />
         </joint>
     </ros2_control>
 
     <gazebo>
         <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <parameters>$(find luna_test)/config/my_controllers.yaml</parameters>
+            <parameters>/home/ws/src/luna_test/config/my_controllers.yaml</parameters>
         </plugin>
     </gazebo>
-
 </robot>
