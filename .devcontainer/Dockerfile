@@ -26,6 +26,8 @@ RUN apt-get install -y ros-humble-ros2-controllers
 RUN apt-get install -y ros-humble-gazebo-ros2-control
 RUN apt-get install -y ros-humble-teleop-twist-joy
 RUN apt-get install -y ros-humble-teleop-twist-keyboard
+RUN apt-get install -y joystick jstest-gtk
+RUN apt-get install -y evtest
 ENV SHELL /bin/bash
 
 # ********************************************************
@@ -33,5 +35,5 @@ ENV SHELL /bin/bash
 # ********************************************************
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
-USER $USERNAME
+# USER $USERNAME
 CMD ["/bin/bash"]
