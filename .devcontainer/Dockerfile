@@ -24,6 +24,8 @@ RUN apt-get install -y ros-humble-gazebo-ros-pkgs
 RUN apt-get install -y ros-humble-ros2-control
 RUN apt-get install -y ros-humble-ros2-controllers
 RUN apt-get install -y ros-humble-gazebo-ros2-control
+RUN apt-get install -y ros-humble-teleop-twist-joy
+RUN apt-get install -y ros-humble-teleop-twist-keyboard
 ENV SHELL /bin/bash
 
 # ********************************************************
