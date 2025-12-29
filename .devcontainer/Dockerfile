@@ -20,6 +20,7 @@ RUN apt-get install -y python3-pip
 RUN apt-get install -y git
 RUN apt-get install -y ros-humble-xacro ros-humble-joint-state-publisher-gui
 RUN apt-get install -y ros-humble-rviz2
+RUN apt-get install -y ros-humble-gazebo-ros-pkgs
 ENV SHELL /bin/bash
 
 # ********************************************************
