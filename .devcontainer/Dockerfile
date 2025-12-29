@@ -21,6 +21,9 @@ RUN apt-get install -y git
 RUN apt-get install -y ros-humble-xacro ros-humble-joint-state-publisher-gui
 RUN apt-get install -y ros-humble-rviz2
 RUN apt-get install -y ros-humble-gazebo-ros-pkgs
+RUN apt-get install -y ros-humble-ros2-control
+RUN apt-get install -y ros-humble-ros2-controllers
+RUN apt-get install -y ros-humble-gazebo-ros2-control
 ENV SHELL /bin/bash
 
 # ********************************************************
