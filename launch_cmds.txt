@@ -8,10 +8,14 @@ Run Gazebo Launch File:
 ros2 launch luna_test launch_sim.launch.py world:=./src/luna_test/worlds/test.world
 
 Teleop Keyboard Control:
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 
 Run Rviz:
 rviz2
+
+Controller Manager:
+ros2 run controller_manager spawner diff_cont
+ros2 run controller_manager spawner joint_broad
 
 Run Gazebo:
 ros2 launch gazebo_ros gazebo.launch.py
