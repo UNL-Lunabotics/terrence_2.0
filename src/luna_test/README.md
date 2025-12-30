@@ -1,8 +1,9 @@
 ## Lunabotics ROS Tutorial
 
 ### TODO: 
-- LIDAR simulation
 - Depth camera simulation
+- SLAM Simulation
+- Nav2 Simulation
 - Migrate to new Gazebo
 - Migrate to ROS2 Jazzy
 
