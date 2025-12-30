@@ -1,11 +1,11 @@
 {
     "name": "ROS 2 Development Container",
-    "privileged": true,
-    "remoteUser": "root",
+    "remoteUser": "jesse",
     "build": {
         "dockerfile": "Dockerfile",
         "args": {
-            "USERNAME": "jesse"
+            "USERNAME": "jesse",
+            "INPUT_GID": "995"
         }
     },
     "workspaceFolder": "/home/ws/",
@@ -31,6 +31,9 @@
         "--net=host",
         "--pid=host",
         "--ipc=host",
-        "-e", "DISPLAY=${env:DISPLAY}"
+        "-e", "DISPLAY=${env:DISPLAY}",
+        "--device=/dev/input",
+        "--group-add=input",
+        "--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw"
     ]
 }
