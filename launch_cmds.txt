@@ -1,27 +1,11 @@
 Source Files:
 source /opt/ros/humble/setup.bash && source install/setup.bash
 
-Run Launch File:
-ros2 launch luna_test rsp.launch.py use_sim_time:=true
-
 Run Gazebo Launch File:
 ros2 launch luna_test launch_sim.launch.py world:=./src/luna_test/worlds/test.world
 
-Run Joystick Launch File:
-ros2 launch luna_test joystick.launch.py
+Run Image Viewer:
+ros2 run rqt_image_view rqt_image_view
 
 Run Rviz:
 rviz2
-
-Controller Manager:
-ros2 run controller_manager spawner diff_cont
-ros2 run controller_manager spawner joint_broad
-
-Run Gazebo:
-ros2 launch gazebo_ros gazebo.launch.py
-
-Spawn Robot in Gazebo:
-ros2 run gazebo_ros spawn_entity.py -topic robot_description -entity terrence
-
-Run Joint GUI
-ros2 run joint_state_publisher_gui joint_state_publisher_gui
