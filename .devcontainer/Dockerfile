@@ -4,7 +4,7 @@ ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 ARG INPUT_GID=995
 
-# Delete user if it exists in container (e.g Ubuntu Jammy: ubuntu)
+# Delete user if it exists in container
 RUN if id -u $USER_UID ; then userdel `id -un $USER_UID` ; fi
 
 # Create the user
