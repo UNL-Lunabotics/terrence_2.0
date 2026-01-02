@@ -32,7 +32,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ros-humble-ros2-controllers \
     ros-humble-gazebo-ros2-control \
     ros-humble-teleop-twist-joy \
-    ros-humble-teleop-twist-keyboard
+    ros-humble-image-transport-plugins
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
 

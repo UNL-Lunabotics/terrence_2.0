@@ -10,9 +10,6 @@ ros2 launch luna_test launch_sim.launch.py world:=./src/luna_test/worlds/test.wo
 Run Joystick Launch File:
 ros2 launch luna_test joystick.launch.py
 
-Teleop Keyboard Control:
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
-
 Run Rviz:
 rviz2
 
