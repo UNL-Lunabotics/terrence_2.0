@@ -33,7 +33,8 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     ros-humble-gazebo-ros2-control \
     ros-humble-teleop-twist-joy \
     ros-humble-image-transport-plugins \
-    ros-humble-rqt-image-view
+    ros-humble-rqt-image-view \
+    ros-humble-slam-toolbox
 # Set the default shell to bash instead of sh
 ENV SHELL /bin/bash
 
