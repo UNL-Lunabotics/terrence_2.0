@@ -10,5 +10,4 @@
 ### Issues:
 - Odometry reporting does not account for collisions
 - Depth camera visualization oriented incorrectly in rviz
-- Robot model missing in Gazebo???
 - If I breathe on this code wrong it will explode.
