@@ -8,7 +8,7 @@ Run Image Viewer:
 ros2 run rqt_image_view rqt_image_view
 
 Run Rviz:
-rviz2
+ros2 run rviz2 rviz2 -d src/articubot_one/config/rviz_config.rviz --ros-args -p use_sim_time:=true
 
 Run Slam Toolbox:
 ros2 launch slam_toolbox online_async_launch.py params_file:=./src/luna_test/config/mapper_params_online_async.yaml use_sim_time:=true
